@@ -1,0 +1,47 @@
+package p120;
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode() {
+    }
+
+    TreeNode(int val) {
+        this.val = val;
+    }
+
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+class Solution {
+    public int sumNumbers(TreeNode root) {
+        return dfs(root, 0);
+    }
+
+    private int dfs(TreeNode node, int current) {
+        if (node == null) return 0;
+
+        current = current * 10 + node.val;
+
+        if (node.left == null && node.right == null)
+            return current;
+
+        return dfs(node.left, current) +
+               dfs(node.right, current);
+    }
+}
+
+public class Problem120_sumRootToLeafNumbers {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        int result = obj.sumNumbers(root);
+        System.out.println(result);
+    }
+}
